@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from "react-navigation-tabs";
 import TabBarIcon from "../components/TabBarIcon";
 import LoginScreen from "../screens/LoginScreen";
 import LinksScreen from "../screens/LinksScreen";
+import SignupScreen from "../screens/SignupScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 
 const config = Platform.select({
@@ -53,7 +54,25 @@ LinksStack.navigationOptions = {
   )
 };
 
-LinksStack.path = "";
+SignupScreen.path = "Signup";
+const SignupScreenStack = createStackNavigator(
+  {
+    Links: SignupScreen
+  },
+  config
+);
+
+SignupScreenStack.navigationOptions = {
+  tabBarLabel: "Links",
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? "ios-link" : "md-link"}
+    />
+  )
+};
+
+SignupScreen.path = "";
 
 const SettingsStack = createStackNavigator(
   {
@@ -77,7 +96,8 @@ SettingsStack.path = "";
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   LinksStack,
-  SettingsStack
+  SettingsStack,
+  SignupScreen
 });
 
 tabNavigator.path = "";
